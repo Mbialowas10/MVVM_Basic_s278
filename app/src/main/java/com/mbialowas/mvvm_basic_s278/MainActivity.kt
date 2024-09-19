@@ -20,6 +20,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 
 import androidx.lifecycle.ViewModelProvider
+import com.mbialowas.mvvm_basic_s278.data.MoviesViewModel
+import com.mbialowas.mvvm_basic_s278.screens.DisplayFavoritesMovies
+import com.mbialowas.mvvm_basic_s278.screens.MovieScreen
 import com.mbialowas.mvvm_basic_s278.ui.theme.MVVM_Basic_s278Theme
 
 class MainActivity : ComponentActivity() {
@@ -30,9 +33,12 @@ class MainActivity : ComponentActivity() {
             MVVM_Basic_s278Theme {
                 // initialize the viewModel
                 val viewModel: AppViewModel = ViewModelProvider(this)[AppViewModel::class.java]
+                val movieViewModel: MoviesViewModel = ViewModelProvider(this)[MoviesViewModel::class.java]
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Counter(modifier = Modifier.padding(innerPadding), viewModel = viewModel)
+                    // Counter(modifier = Modifier.padding(innerPadding), viewModel = viewModel)
+                    MovieScreen(modifier = Modifier.padding(innerPadding), viewModel = movieViewModel)
+                    DisplayFavoritesMovies(movies = movieViewModel.movies)
                 }
             }
         }
